@@ -1,8 +1,10 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import CategorySection from '../components/CategorySection'
+import { useNavigate } from 'react-router'
 
 const Home = () => {
+    let navigate = useNavigate()
     return (
         <div>
             <div
@@ -39,7 +41,9 @@ const Home = () => {
                             emotion, and timeless composition.
                         </p>
 
-                        <button className="mt-8 bg-[#B6FF3B] text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
+                        <button
+                        onClick={()=>navigate("/contact")}
+                         className="mt-8 bg-[#B6FF3B] text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
                             Get in touch
                         </button>
                     </div>

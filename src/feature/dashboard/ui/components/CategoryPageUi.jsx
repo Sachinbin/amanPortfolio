@@ -1,7 +1,9 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { useNavigate, useParams } from "react-router";
 import { categories } from "../../api/category";
-import ImageCard from "./ImageCard";
+import Skeleton from "./Skeleton";
+const ImageCard = lazy(()=> import("./ImageCard"));
+
 
 
 const CategoryPage = () => {
@@ -11,10 +13,9 @@ const CategoryPage = () => {
     let res = categories.find((elem) => {
         return elem.id == id
     })
-    // console.log(categories);
-
-    console.log(res);
-
+  if (!res) {
+    return <h1 className="text-white">Category not found</h1>;
+  }
 
     return (
         <div className="min-h-screen bg-black text-white px-10 lg:px-20 py-16">
@@ -34,15 +35,17 @@ const CategoryPage = () => {
             </div>
 
             {/* Image Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+           <Suspense fallback={<Skeleton/>}>
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {
 
-                    (res.images || []).map((elem) => {
-                        return <ImageCard images={elem} />
+                    (res.images).map((elem) => {
+                        return <ImageCard key={elem.id} images={elem}/>
                     })
                 }
             </div>
 
+           </Suspense>
         </div>
     );
 };

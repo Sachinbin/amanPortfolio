@@ -33,14 +33,14 @@ const Navbar = () => {
                     About
                 </NavLink>
 
-                {/* <NavLink
-                    to="/portfolio"
+                <NavLink
+                    to="/contact"
                     className={({ isActive }) =>
                         isActive ? "text-[#B6FF3B]" : "hover:text-[#B6FF3B] transition"
                     }
                 >
-                    Portfolio
-                </NavLink> */}
+                    Contact
+                </NavLink>
             </div>
 
             {/* Right Icons */}

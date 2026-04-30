@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Navbar from "../components/Navbar";
+import Skeleton from "../components/Skeleton";
 
 const About = () => {
   return (
@@ -47,30 +48,32 @@ const About = () => {
         </div>
 
         {/* Grid Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[
-            "/Form 1.jpg",
-            "/leading line 1.jpg",
-            "/pattern 4.jpg",
-            "/Reflection 4.jpg",
-            "/Rule of third 1.jpg",
-            "/Symmetry 1.jpg",
-            "/Unusual angle 1.jpg",
-            "/Contrasting Colour .jpg",
-            "/Frame in frame 4.jpg",
-          ].map((img, index) => (
-            <div
-              key={index}
-              className="overflow-hidden group cursor-pointer rounded-xl"
-            >
-              <img
-                src={img}
-                alt="project"
-                className="w-full h-72 object-cover group-hover:scale-110 transition duration-500"
-              />
-            </div>
-          ))}
-        </div>
+        <Suspense fallback={<Skeleton />}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              "/Form 1.jpg",
+              "/leading line 1.jpg",
+              "/pattern 4.jpg",
+              "/Reflection 4.jpg",
+              "/Rule of third 1.jpg",
+              "/Symmetry 1.jpg",
+              "/Unusual angle 1.jpg",
+              "/Contrasting Colour .jpg",
+              "/Frame in frame 4.jpg",
+            ].map((img, index) => (
+              <div
+                key={index}
+                className="overflow-hidden group cursor-pointer rounded-xl"
+              >
+                <img
+                  src={img}
+                  alt="project"
+                  className="w-full h-72 object-cover group-hover:scale-110 transition duration-500"
+                />
+              </div>
+            ))}
+          </div>
+        </Suspense>
 
       </section>
     </div>

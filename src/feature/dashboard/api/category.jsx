@@ -18,10 +18,10 @@ export let  categories = [
     desc: "High-quality product shots with controlled lighting, sharp details, and premium finish.",
     images:['/product/file_00000000be54720bb19b834328f2ed4c.jpg','/product/IMG_4527.jpg','/product/IMG.jpg']
   },
-  {
-    id:4,
-    title: "STREET PHOTOGRAPHY",
-    desc: "Real-life moments captured with raw emotion, candid expressions, and urban storytelling.",
-    images:'/fashion'
-  },
+  // {
+  //   id:4,
+  //   title: "STREET PHOTOGRAPHY",
+  //   desc: "Real-life moments captured with raw emotion, candid expressions, and urban storytelling.",
+  //   images:'/fashion'
+  // },
 ];
