@@ -64,10 +64,10 @@ const Footer = () => {
                 icon: FaLinkedinIn,
                 link: "https://www.linkedin.com/in/aman-g-saroj-076a6820b/",
               },
-              {
-                icon: FaDribbble,
-                link: "#",
-              },
+              // {
+              //   icon: FaDribbble,
+              //   link: "#",
+              // },
             ].map(({ icon: Icon, link }, index) => (
               <a
                 key={index}
