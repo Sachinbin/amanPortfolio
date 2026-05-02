@@ -35,17 +35,16 @@ const CategoryPage = () => {
             </div>
 
             {/* Image Grid */}
-           <Suspense fallback={<Skeleton/>}>
              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {
 
                     (res.images).map((elem) => {
-                        return <ImageCard key={elem.id} images={elem}/>
+                        return <Suspense fallback={<Skeleton/>}><ImageCard key={elem.id} images={elem}/></Suspense>
                     })
                 }
             </div>
 
-           </Suspense>
+           
         </div>
     );
 };
