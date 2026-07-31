@@ -1,8 +1,8 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useMemo } from "react";
 import { useNavigate, useParams } from "react-router";
 import { categories } from "../../api/category";
 import Skeleton from "./Skeleton";
-const ImageCard = lazy(()=> import("./ImageCard"));
+const ImageCard = lazy(() => import("./ImageCard"));
 
 
 
@@ -10,12 +10,24 @@ const CategoryPage = () => {
     let { id } = useParams()
     let navigate = useNavigate()
 
-    let res = categories.find((elem) => {
-        return elem.id == id
-    })
-  if (!res) {
-    return <h1 className="text-white">Category not found</h1>;
-  }
+    const res = useMemo(
+        () => categories.find((elem) => elem.id === Number(id)),
+        [id]
+    );
+
+    const imageGrid = useMemo(
+        () =>
+            res?.images?.map((elem) => (
+                <Suspense fallback={<Skeleton />} key={elem}>
+                    <ImageCard images={elem} />
+                </Suspense>
+            )),
+        [res]
+    );
+
+    if (!res) {
+        return <h1 className="text-white">Category not found</h1>;
+    }
 
     return (
         <div className="min-h-screen bg-black text-white px-10 lg:px-20 py-16">
@@ -35,13 +47,8 @@ const CategoryPage = () => {
             </div>
 
             {/* Image Grid */}
-             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {
-
-                    (res.images).map((elem) => {
-                        return <Suspense fallback={<Skeleton/>}><ImageCard key={elem.id} images={elem}/></Suspense>
-                    })
-                }
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {imageGrid}
             </div>
 
            

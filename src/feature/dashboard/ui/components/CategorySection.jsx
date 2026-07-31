@@ -1,16 +1,16 @@
-import React from "react";
+import React, { memo } from "react";
 import { useNavigate } from "react-router";
 import { categories } from "../../api/category";
 
 const CategorySection = () => {
-  let navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="w-full">
 
-      {categories.map((item, index) => (
+      {categories.map((item) => (
         <div
-        onClick={()=>navigate(`/${item.id}`)}
-          key={index}
+          onClick={() => navigate(`/${item.id}`)}
+          key={item.id}
           className="group w-full px-10 lg:px-20 py-12 border-b border-gray-300 bg-white text-black hover:bg-black hover:text-white transition duration-300 cursor-pointer"
         >
           <div className="flex justify-between items-center">

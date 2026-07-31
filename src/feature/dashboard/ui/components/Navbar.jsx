@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useMemo, useState } from "react";
 import {
   FaFacebookF,
   FaInstagram,
@@ -11,26 +11,32 @@ import { NavLink } from "react-router";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
-  ];
+  const navLinks = useMemo(
+    () => [
+      { name: "Home", path: "/" },
+      { name: "About", path: "/about" },
+      { name: "Contact", path: "/contact" },
+    ],
+    []
+  );
 
-  const socials = [
-    {
-      icon: FaFacebookF,
-      link: "https://www.facebook.com/amang.saroj/",
-    },
-    {
-      icon: FaInstagram,
-      link: "https://www.instagram.com/aman_g_saroj/",
-    },
-    {
-      icon: FaLinkedinIn,
-      link: "https://www.linkedin.com/in/aman-g-saroj-076a6820b/",
-    },
-  ];
+  const socials = useMemo(
+    () => [
+      {
+        icon: FaFacebookF,
+        link: "https://www.facebook.com/amang.saroj/",
+      },
+      {
+        icon: FaInstagram,
+        link: "https://www.instagram.com/aman_g_saroj/",
+      },
+      {
+        icon: FaLinkedinIn,
+        link: "https://www.linkedin.com/in/aman-g-saroj-076a6820b/",
+      },
+    ],
+    []
+  );
 
   return (
     <div className="w-full flex justify-between items-center px-6 lg:px-20 py-4 absolute top-0 z-50 text-white">
@@ -40,9 +46,9 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex gap-8 text-sm font-medium tracking-wide">
-        {navLinks.map((item, index) => (
+        {navLinks.map((item) => (
           <NavLink
-            key={index}
+            key={item.path}
             to={item.path}
             end={item.path === "/"}
             className={({ isActive }) =>
@@ -58,9 +64,9 @@ const Navbar = () => {
 
       {/* Desktop Social Icons */}
       <div className="hidden md:flex gap-4">
-        {socials.map(({ icon: Icon, link }, index) => (
+        {socials.map(({ icon: Icon, link }) => (
           <a
-            key={index}
+            key={link}
             href={link}
             target="_blank"
             rel="noopener noreferrer"
@@ -86,9 +92,9 @@ const Navbar = () => {
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {navLinks.map((item, index) => (
+        {navLinks.map((item) => (
           <NavLink
-            key={index}
+            key={item.path}
             to={item.path}
             onClick={() => setOpen(false)}
             className={({ isActive }) =>
@@ -103,9 +109,9 @@ const Navbar = () => {
 
         {/* Social Icons Mobile */}
         <div className="flex gap-4 mt-6">
-          {socials.map(({ icon: Icon, link }, index) => (
+          {socials.map(({ icon: Icon, link }) => (
             <a
-              key={index}
+              key={link}
               href={link}
               target="_blank"
               rel="noopener noreferrer"
@@ -120,4 +126,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

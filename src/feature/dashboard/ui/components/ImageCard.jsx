@@ -1,12 +1,9 @@
-import React, { Suspense, useState } from 'react'
+import React, { memo, useState } from 'react'
 import { X } from 'lucide-react'
-import { use } from 'react'
-import Skeleton from './Skeleton'
 
-const ImageCard = ({ images }) => {
+const ImageCard = memo(({ images }) => {
   const [open, setOpen] = useState(false)
-  // let props = use(images)
-  
+
   return (
     <div>
       <div>
@@ -15,13 +12,14 @@ const ImageCard = ({ images }) => {
           onClick={() => setOpen(true)}
           className="group relative overflow-hidden rounded-2xl bg-white/10 h-80 cursor-pointer"
         >
-          <Suspense fallback={<Skeleton/>}>
-            <img
+          <img
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
             src={images}
-            alt="img"
+            alt="portfolio"
             className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
           />
-          </Suspense>
 
           {/* Hover Overlay */}
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition"></div>
@@ -30,7 +28,6 @@ const ImageCard = ({ images }) => {
         {/* Fullscreen Preview */}
         {open && (
           <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50">
-
             {/* ❌ Close Button */}
             <button
               onClick={() => setOpen(false)}
@@ -50,6 +47,6 @@ const ImageCard = ({ images }) => {
       </div>
     </div>
   )
-}
+})
 
 export default ImageCard
