@@ -42,7 +42,7 @@ const Navbar = () => {
     <div className="w-full flex justify-between items-center px-6 lg:px-20 py-4 absolute top-0 z-50 text-white">
 
       {/* Logo / Name */}
-      <h1 className="text-lg font-bold tracking-wide">Aman</h1>
+      <h1 className="text-lg font-bold tracking-wide">Camer<span className="text-[#B6FF3B]">Aman</span></h1>
 
       {/* Desktop Menu */}
       <div className="hidden md:flex gap-8 text-sm font-medium tracking-wide">

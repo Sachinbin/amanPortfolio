@@ -1,7 +1,9 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
-import CategorySection from '../components/CategorySection'
 import { useNavigate } from 'react-router'
+let Navbar = React.lazy(() => import('../../../dashboard/ui/components/Navbar'))
+let CategorySection = React.lazy(() => import('../components/CategorySection'))
+let About = React.lazy(() => import('./About'))
+let Contact = React.lazy(() => import('../../../contact/ui/page/Contact'))
 
 const Home = () => {
     let navigate = useNavigate()
@@ -68,6 +70,8 @@ const Home = () => {
                 </div>
             </div>
             <CategorySection />
+            <About/>
+            <Contact/>
         </div>
     )
 }

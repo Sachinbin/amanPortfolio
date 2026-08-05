@@ -58,7 +58,7 @@ const Footer = () => {
               },
               {
                 icon: FaInstagram,
-                link: "https://www.instagram.com/aman_g_saroj/",
+                link: "https://www.instagram.com/frameit.with_me/",
               },
               {
                 icon: FaLinkedinIn,

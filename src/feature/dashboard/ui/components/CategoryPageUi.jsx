@@ -14,6 +14,7 @@ const CategoryPage = () => {
         () => categories.find((elem) => elem.id === Number(id)),
         [id]
     );
+    console.log(res.images[0])
 
     const imageGrid = useMemo(
         () =>
