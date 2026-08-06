@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
-let Navbar = React.lazy(() => import('../../../dashboard/ui/components/Navbar'))
-let CategorySection = React.lazy(() => import('../components/CategorySection'))
-let About = React.lazy(() => import('./About'))
-let Contact = React.lazy(() => import('../../../contact/ui/page/Contact'))
+import Navbar from '../components/Navbar'
+import CategorySection from '../components/CategorySection'
+import About from './About'
+import Contact from '../../../contact/ui/page/Contact'
 
 const Home = () => {
     let navigate = useNavigate()
