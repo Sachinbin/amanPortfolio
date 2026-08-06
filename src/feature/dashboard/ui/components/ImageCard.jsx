@@ -18,7 +18,7 @@ const ImageCard = memo(({ images }) => {
             fetchpriority="low"
             src={images}
             alt="portfolio"
-            className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+            className="w-full h-full object-cover object-top group-hover:scale-110 transition duration-500"
           />
 
           {/* Hover Overlay */}
