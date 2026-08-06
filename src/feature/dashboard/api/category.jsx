@@ -14,6 +14,8 @@ export let  categories = [
       '/fashion/IMG_0673 (1).jpg',
       '/fashion/IMG_0720.jpg',
       '/fashion/IMG_0958 (1).jpg',
+      '/fashion/IMG_8624.jpg',
+      '/fashion/IMG_8458.jpg',
     ]
   },
   {

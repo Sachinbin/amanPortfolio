@@ -40,7 +40,7 @@ const ImageCard = memo(({ images }) => {
             <img
               src={images}
               alt="preview"
-              className="max-h-[90%] max-w-[90%] object-contain rounded-lg"
+              className="max-h-[90vh] max-w-[95vw] h-auto w-auto object-contain rounded-lg"
             />
           </div>
         )}
