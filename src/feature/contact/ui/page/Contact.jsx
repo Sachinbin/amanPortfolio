@@ -1,10 +1,11 @@
 import React from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import Navbar from '../../../dashboard/ui/components/Navbar'
 import { useForm } from 'react-hook-form'
 import { ToastContainer, toast } from 'react-toastify';
 
-
 const Contact = () => {
+  const shouldReduceMotion = useReducedMotion();
   let {
     register,
     handleSubmit,
@@ -14,20 +15,23 @@ const Contact = () => {
     mode: "onChange"
   })
 
-
   let handleSub = (data) => {
     console.log(data);
     toast.success("Message sent successfully ")
     reset()
-
   }
+
   return (
     <div className="bg-black text-white min-h-screen">
       <Navbar />
 
-      <div className="px-10 lg:px-20 py-20">
-
-        {/* Heading */}
+      <motion.div
+        initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.55 }}
+        className="px-10 lg:px-20 py-20"
+      >
         <div className="mb-16">
           <h1 className="text-4xl lg:text-6xl font-extrabold">
             Get in Touch
@@ -37,14 +41,16 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-
-          {/* Form */}
-          <form onSubmit={handleSubmit(handleSub)}>
+          <motion.form
+            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, x: -14 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.5 }}
+            onSubmit={handleSubmit(handleSub)}
+          >
             <div className="space-y-6">
-
-              <div>
+              <motion.div whileHover={{ y: -2, scale: 1.01 }} transition={{ duration: 0.25 }}>
                 <input
                   {...register("name", { required: "Please fill the name" })}
                   type="text"
@@ -52,40 +58,47 @@ const Contact = () => {
                   className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-[#B6FF3B]"
                 />
                 {errors.name && <p className='text-sm text-red-500'>{errors.name.message}</p>}
-              </div>
+              </motion.div>
 
-              <div>
+              <motion.div whileHover={{ y: -2, scale: 1.01 }} transition={{ duration: 0.25 }}>
                 <input
-                {...register("email", { required: "Please fill the email" })}
-                type="email"
-                placeholder="Your Email"
-                className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-[#B6FF3B]"
-              />
-               {errors.email && <p className='text-sm text-red-500'>{errors.email.message}</p>}
-              </div>
+                  {...register("email", { required: "Please fill the email" })}
+                  type="email"
+                  placeholder="Your Email"
+                  className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-[#B6FF3B]"
+                />
+                {errors.email && <p className='text-sm text-red-500'>{errors.email.message}</p>}
+              </motion.div>
 
-             <div>
-               <textarea
-                {...register("message", { required: "Please fill the message" })}
-                rows="5"
-                placeholder="Your Message"
-                className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-[#B6FF3B]"
-              ></textarea>
-               {errors.message && <p className='text-sm text-red-500'>{errors.message.message}</p>}
+              <motion.div whileHover={{ y: -2, scale: 1.01 }} transition={{ duration: 0.25 }}>
+                <textarea
+                  {...register("message", { required: "Please fill the message" })}
+                  rows="5"
+                  placeholder="Your Message"
+                  className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-[#B6FF3B]"
+                ></textarea>
+                {errors.message && <p className='text-sm text-red-500'>{errors.message.message}</p>}
+              </motion.div>
 
-             </div>
-              <button
+              <motion.button
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.25 }}
                 type='submit'
-                className="bg-[#B6FF3B] text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
+                className="bg-[#B6FF3B] text-black px-6 py-3 rounded-full font-semibold"
+              >
                 Send Message
-              </button>
-
+              </motion.button>
             </div>
-          </form>
+          </motion.form>
 
-          {/* Contact Info */}
-          <div className="space-y-6 text-white/70">
-
+          <motion.div
+            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, x: 14 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.5, delay: 0.06 }}
+            className="space-y-6 text-white/70"
+          >
             <div>
               <h3 className="text-xl font-semibold text-white">Email</h3>
               <p>amangsaroj987@gmail.com</p>
@@ -101,28 +114,24 @@ const Contact = () => {
               <p>Mumbai, India</p>
             </div>
 
-            {/* Socials */}
             <div className="pt-6">
               <h3 className="text-xl font-semibold text-white mb-3">Follow Me</h3>
 
               <div className="flex gap-4">
-                <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#B6FF3B] hover:text-black transition cursor-pointer">
+                <motion.div whileHover={{ y: -3, scale: 1.06 }} className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#B6FF3B] hover:text-black transition cursor-pointer">
                   IG
-                </div>
-                <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#B6FF3B] hover:text-black transition cursor-pointer">
+                </motion.div>
+                <motion.div whileHover={{ y: -3, scale: 1.06 }} className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#B6FF3B] hover:text-black transition cursor-pointer">
                   TW
-                </div>
-                <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#B6FF3B] hover:text-black transition cursor-pointer">
+                </motion.div>
+                <motion.div whileHover={{ y: -3, scale: 1.06 }} className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#B6FF3B] hover:text-black transition cursor-pointer">
                   LN
-                </div>
+                </motion.div>
               </div>
             </div>
-
-          </div>
-
+          </motion.div>
         </div>
-
-      </div>
+      </motion.div>
       <ToastContainer />
     </div>
   )

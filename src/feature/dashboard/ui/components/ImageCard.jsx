@@ -1,50 +1,63 @@
 import React, { memo, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { X } from 'lucide-react'
 
 const ImageCard = memo(({ images }) => {
   const [open, setOpen] = useState(false)
+  const shouldReduceMotion = useReducedMotion()
 
   return (
     <div>
-      <div>
-        {/* Card */}
-        <div
-          onClick={() => setOpen(true)}
-          className="group relative overflow-hidden rounded-2xl bg-white/10 h-80 cursor-pointer"
-        >
-          <img
-            loading="lazy"
-            decoding="async"
-            fetchpriority="low"
-            src={images}
-            alt="portfolio"
-            className="w-full h-full object-cover object-top group-hover:scale-110 transition duration-500"
-          />
+      <motion.div
+        whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4 }}
+        transition={{ duration: 0.3 }}
+        onClick={() => setOpen(true)}
+        className="group relative overflow-hidden rounded-2xl bg-white/10 h-80 cursor-pointer"
+      >
+        <img
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
+          src={images}
+          alt="portfolio"
+          className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-110"
+        />
 
-          {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition"></div>
-        </div>
+        <div className="absolute inset-0 bg-black/40 opacity-0 transition group-hover:opacity-100"></div>
+      </motion.div>
 
-        {/* Fullscreen Preview */}
+      <AnimatePresence>
         {open && (
-          <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50">
-            {/* ❌ Close Button */}
-            <button
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
+          >
+            <motion.button
+              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.25 }}
               onClick={() => setOpen(false)}
               className="absolute top-6 right-6 text-white hover:text-[#B6FF3B] transition"
             >
               <X size={32} />
-            </button>
+            </motion.button>
 
-            {/* Image */}
-            <img
+            <motion.img
+              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
               src={images}
               alt="preview"
               className="max-h-[90vh] max-w-[95vw] h-auto w-auto object-contain rounded-lg"
             />
-          </div>
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </div>
   )
 })

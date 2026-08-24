@@ -1,4 +1,5 @@
 import React, { memo, useMemo, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   FaFacebookF,
   FaInstagram,
@@ -10,6 +11,7 @@ import { NavLink } from "react-router";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const navLinks = useMemo(
     () => [
@@ -39,12 +41,14 @@ const Navbar = () => {
   );
 
   return (
-    <div className="w-full flex justify-between items-center px-6 lg:px-20 py-4 absolute top-0 z-50 text-white">
-
-      {/* Logo / Name */}
+    <motion.div
+      initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+      className="w-full flex justify-between items-center px-6 lg:px-20 py-4 absolute top-0 z-50 text-white"
+    >
       <h1 className="text-lg font-bold tracking-wide">Camer<span className="text-[#B6FF3B]">Aman</span></h1>
 
-      {/* Desktop Menu */}
       <div className="hidden md:flex gap-8 text-sm font-medium tracking-wide">
         {navLinks.map((item) => (
           <NavLink
@@ -62,22 +66,22 @@ const Navbar = () => {
         ))}
       </div>
 
-      {/* Desktop Social Icons */}
       <div className="hidden md:flex gap-4">
         {socials.map(({ icon: Icon, link }) => (
-          <a
+          <motion.a
             key={link}
             href={link}
             target="_blank"
             rel="noopener noreferrer"
+            whileHover={{ y: -3, scale: 1.04, color: "#B6FF3B" }}
+            transition={{ duration: 0.25 }}
             className="w-9 h-9 flex items-center justify-center border border-gray-500 rounded-full hover:border-[#B6FF3B] hover:text-[#B6FF3B] transition"
           >
             <Icon size={14} />
-          </a>
+          </motion.a>
         ))}
       </div>
 
-      {/* Mobile Menu Button */}
       <div className="md:hidden z-50">
         {open ? (
           <FaTimes size={22} onClick={() => setOpen(false)} />
@@ -86,11 +90,11 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={`fixed top-0 left-0 w-full h-screen bg-black flex flex-col items-center justify-center gap-8 text-lg transition duration-300 ${
-          open ? "translate-x-0" : "-translate-x-full"
-        }`}
+      <motion.div
+        initial={false}
+        animate={open ? { x: 0, opacity: 1 } : { x: "-100%", opacity: 0 }}
+        transition={{ duration: 0.35, ease: "easeOut" }}
+        className="fixed top-0 left-0 w-full h-screen bg-black flex flex-col items-center justify-center gap-8 text-lg"
       >
         {navLinks.map((item) => (
           <NavLink
@@ -107,22 +111,23 @@ const Navbar = () => {
           </NavLink>
         ))}
 
-        {/* Social Icons Mobile */}
         <div className="flex gap-4 mt-6">
           {socials.map(({ icon: Icon, link }) => (
-            <a
+            <motion.a
               key={link}
               href={link}
               target="_blank"
               rel="noopener noreferrer"
+              whileHover={{ scale: 1.06, y: -2, color: "#B6FF3B" }}
+              transition={{ duration: 0.25 }}
               className="w-10 h-10 flex items-center justify-center border border-gray-500 rounded-full hover:border-[#B6FF3B] hover:text-[#B6FF3B] transition"
             >
               <Icon size={16} />
-            </a>
+            </motion.a>
           ))}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

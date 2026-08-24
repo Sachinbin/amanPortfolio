@@ -27,8 +27,6 @@ export let  categories = [
       '/food/2.jpg',
       '/food/3.jpg',
       '/food/image_2.jpg',
-      '/food/IMG_5296-1 (1) (1).jpg',
-      '/food/IMG_5300 (1).jpg',
       '/food/IMG_5315 (2) (2).jpg',
       '/food/IMG_6388.jpg',
     ]
